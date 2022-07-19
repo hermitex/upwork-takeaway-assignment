@@ -1,29 +1,34 @@
 function longestWordInSentence(sentence) {
   let longestWord = "";
-  sentence = sentence.split(/(\s+)/);
+  sentence = sentence.split(/(\s+)/); // make an array of words preserving all whitespaces
   for (let word of sentence) {
-    if (word !== "") {
-      word = word.match(/^[a-z]+|(\s+)/i)[0];
-      if (word.length > longestWord.length) {
+    if (word !== "") { // make sure the word is not null
+      word = word.match(/^[a-z]+|(\s+)/i)[0]; // extract only alphabetic characters from a word.
+
+    //   Find the longest word
+      if (word.length > longestWord.length) { 
         longestWord = word;
       } else if(word.length < longestWord.length){
         longestWord = longestWord;
-      }else if (word.trim().length === longestWord.trim().length) {
+        // When there are multiple words with the same length, trim them first
+        // And check which has more vowels
+      }else if (word.trim().length === longestWord.trim().length) { 
         if (
           word.trim() &&
           longestWord.trim() &&
           word.match(/[aeiou]/gm).length > longestWord.match(/[aeiou]/gm).length
         ) {
-          longestWord = word;
+          longestWord = word; // Select word with more vowels to be the longest word
         }
-      } else if (longestWord.match(/[aeiou]/gm)) {
+      } else if (longestWord.match(/[aeiou]/gm)) { // when the word is just empty whitespaces, retain the longestWord as the longestWord 
         longestWord = longestWord;
+        // Otherwise the longestWord is the current word
       } else if (word.match(/[aeiou]/gm)) {
         longestWord = word;
       }
     }
   }
-  return longestWord;
+  return longestWord; // return the result
 }
 
 // Sample Input
